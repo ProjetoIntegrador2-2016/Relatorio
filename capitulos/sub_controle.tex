@@ -1,4 +1,4 @@
-\section{Subsistema: Controle}
+\section{Subsistema: Controle} \label{sec:controle}
 
 \par O subsistema responsável pelo controle do carrinho autônomo controlará os motores (que a princípio estarão acoplados às rodinhas traseiras do carrinho). Além disso, esses subsistema fará a leitura dos sensores responsáveis por localizar o cadeirante e evitar colisões. 
 
@@ -80,7 +80,6 @@ e o carrinho autônomo conta com uma antena direcional que continuamente escanei
 		\label{fig:antenaElectroMagWave}
 	\end{figure} 
     
-%{\color{red} traduzir a imagem e colocar fonte}
 
 \par No sistema baseado em transmissão/recepção de ondas estudado, apenas uma antena direcional é empregada, de modo que a mesma varre o ambiente em ângulos obtusos de até 180$^{\circ}$. Uma desvantagem dessa implementação é que haveria um grande desgaste da estrutura mecânica que move a antena, uma vez que a estrutura que faz o escaneamento do ambiente se move de forma contínua durante todo o tempo de uso do protótipo. 
 
@@ -131,6 +130,8 @@ $$
 u(t)=K_p e(t)+K_i\int_0^t e(t) dt + K_d\frac{de(t)}{dt}
 $$
 
+onde:
+
 Tendo isso como base, podemos controlar a aceleração dos motores a serem usados no carrinho e corrigir os erros de posicionamento produzidos pelos sensores. Já que esse controlador é versátil e necessita de poucas mudanças em sua modelagem para ser aplicável em outro contexto. \cite{wescott2000}
 
 \subsubsection{Detecção do usuário}
@@ -143,293 +144,36 @@ Através do estudo de artigos científicos coletados em bases reconhecidas - com
 
 \subsubsubsection{Processamento de imagens}
 
-	Um dos principais desafios do projeto é fazer com que o carrinho ao seguir o cadeirante seja capaz de reagir ao ambiente, antecipar um obstáculo ou evitar uma colisão, ou seja ele deve se movimentar de forma autônoma. 
-Para que a movimentação autônoma seja possível, uma grande parte dos veículos deste tipo empregam algoritmos de processamento de imagem bem como sensores para permitir identificar o ambiente no qual o veículo está se movimentando. Para lidar com todas essas informações é necessário utilizar programas altamente eficientes e robustos, em muitos casos utilizando \textit{frameworks} desenvolvidas especialmente para aplicações de processamento de imagens e processamento de sinais.
+Um dos principais desafios do projeto é fazer com que o carrinho ao seguir o cadeirante seja capaz de reagir ao ambiente, antecipar um obstáculo ou evitar uma colisões, podendo assim caracterizar-se como autônomo.
+Para que a movimentação autônoma seja possível, uma grande parte dos veículos deste tipo empregam algoritmos de processamento de imagem bem como sensores para permitir identificar o ambiente no qual o veículo está se movimentando. 
+Para a programação dos algoritmos do presente trabalho, depois de realizada diversas pesquisas se optou pela biblioteca \textit{OpenCV} devido à sua robustez, por ser \textit{open source} e possuir vasta gama de materiais didáticos. Outra razão para sua escolha deve-se ao fato de ela contar com uma ampla gama de funções que vão desde interface com o usuário e com câmeras, algoritmos de processamento de imagem, até elementos de inteligência artificial. 
+Existem diversos algoritmos possíveis para processamento de imagens, muitos deles são bastante avançados. Entretanto, para este projeto deseja-se implementar um dos mais simples esquemas: rastreamento de cor. Apenas os dados sobre determinada cor são relevantes. Nenhuma análise complexa da imagem é necessário. O algoritmo não diferencia entre tons de cor ou objetos separados, com a mesma cor. Ele simplesmente relata que partes da imagem estão acima de um limite de cor e quais partes não estão.
 	
-    Para a programação dos algoritmos do presente trabalho, depois de realizada diversas pesquisas cogita-se utilizar uma biblioteca \textit{open source}, robusta e popular conhecida como \textit{OpenCV}. Esta escolha deve-se ao fato de ela contar com uma ampla gama de funções que vão desde interface com o usuário e com câmeras, algoritmos de processamento de imagem, até elementos de inteligência artificial. A biblioteca não está vinculada a nenhum hardware específico o que possibilita a escolha independente dos materiais a serem utilizados. Seu foco principal está exatamente nas aplicações em tempo real, o que a torna bastante interessante para aplicações de visão robótica.
-	
-    Existem milhares de algoritmos para processamento de imagens , muitos deles são bastante avançados. Entretanto para este projeto, deseja-se implementar um dos mais simples esquemas: rastreamento de cor. Este tipo de algoritmo de acompanhamento de cor está preocupado apenas com os dados de cor. Nenhuma análise complexa da imagem é necessário. O algoritmo não diferencia entre tons de cor ou objetos separados, com a mesma cor. Ele simplesmente relata que partes da imagem estão acima de um limite de cor e quais partes não estão.
-	
-    Sendo assim, planeja-se que o robô se mova para a frente quando a cor é concentrada no centro da tela, ou cobre a tela. Se desloque para a esquerda quando a cor é concentrada na metade esquerda da tela e se mova para a direita quando a cor está concentrada no lado direito. 
-	
-    Poderíamos certamente fazer controles de movimento mais detalhadas, no entanto, optou-se por fazer o mais simples possível para garantir que o projeto seja entregue dentro do prazo. 
-	
-    Para finalizar, será explicando de maneira breve como será trabalhada a parte de processamento de imagens. O trabalho será desenvolvido utilizando a biblioteca OpenCV integrada ao Ambiente de Desenvolvimento da \textit{Microsoft, Visual Studio 2012} na linguagem C++, ou no sistema Linux. 
-	
-   A aquisição das imagens do vídeo processado será realizada por meio da função do \textit{OpenCV}, \textit{cvCapture}, e como esta captura uma imagem em RGB, será necessária a conversão da mesma para o espaço de cores HSV, utilizando a função \textit{cvtColor}. Logo após faremos uma (limiarização) multinível. Para que a detecção do objeto seja mais precisa será necessária a aplicação de filtros morfológicos. Logo após esse processo obteremos o objeto selecionado na imagem em tempo real, e para tal utilizaremos o centro obtido por meio dos \textit{Moments}, definidos na \textit{OpenCV}.
- 
-\subsection{Riscos associados}
+Sendo assim, planeja-se que o carrinho se mova para a frente quando a cor é concentrada no centro da tela, ou cobre a tela. Se desloque para a esquerda quando a cor é concentrada na metade esquerda da tela e se mova para a direita quando a cor está concentrada no lado direito. 
 
-Para um bom desenvolvimento do projeto, devem-se levar em conta fatores que possam atrapalhar esse processo, os  riscos associados. Entre eles estão:
+\subsection{Resultados parciais}
 
-\begin{itemize}
-\item Alimentação insuficiente do hardware;
-\item Não conseguir atender o prazo de entrega do subsistema;
-\item Bugs não encontrados no algoritmo;
-\item Falha/queima de componentes;
-\item Falta de conhecimento para desenvolver o produto;
-\item Falha do computador;
-\item Serviço de hospedagem do repositório git fechar;
-\item Problema de saúde ou desistência de integrante;
-\item Software de produção ou sistema falhar.
+Os algoritmos foram desenvolvidos na linguagem Python utilizando sistemas baseados em Linux. 
+	
+A aquisição das imagens a partir da câmera da \textit{Raspberry Pi} se dá utilizando as funções do \textit{OpenCV} :
+
+\begin{itemize} 
+    \item \textit{cvCapture}: captura uma imagem em RGB, será necessária a conversão da mesma para o espaço de cores HSV, utilizando a função
+    \item \textit{cvtColor}. Logo após faremos uma (limiarização) multinível. Para que a detecção do objeto seja mais precisa será necessária a aplicação de filtros morfológicos. Logo após esse processo obteremos o objeto selecionado na imagem em tempo real, e para tal utilizaremos o centro obtido por meio dos \textit{Moments}, definidos na \textit{OpenCV}.
+    \item \textit{cvtColor}:
+    \item \textit{inRange}:
+    \item \textit{erode}:
+    \item \textit{dilate}:
+    \item \textit{minEnclosingCircle}:
+    \item \textit{moments}:
+    \item \textit{circle}:
 \end{itemize}
+ 
+\footnote{https://github.com/ProjetoIntegrador2-2016/Computacao-visual/blob/master/Camera-Control/library.py}
+ 
 
-\subsection{Cronograma Físico-Financeiro}
-Para o projeto do subsistema Controle e Automação, foi feita uma estimativa de tempo de aquisição e preços possíveis dos componentes desse subproduto.
-
-% ######## init table ########
-\begin{table}[h]
- \centering
-% distancia entre a linha e o texto
- {\renewcommand\arraystretch{1.25}
- \caption{Cronograma custo-financeiro Controle.}
- \begin{tabular}{ l l l }
-  \cline{1-1}\cline{2-2}\cline{3-3}  
-    \multicolumn{1}{|c|}{\textbf{Componentes/Recursos} \centering } &
-    \multicolumn{1}{c|}{\textbf{Data de aquisição} \centering } &
-    \multicolumn{1}{c|}{\textbf{Estimativa de preço} \centering }
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}  
-    \multicolumn{1}{|p{3.850cm}|}{Microprocessador (CPU) \centering } &
-    \multicolumn{1}{p{4.217cm}|}{14/09 a 4/10/2016 \centering } &
-    \multicolumn{1}{p{4.217cm}|}{R\$ 25,00 \centering }
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}  
-    \multicolumn{1}{|p{3.850cm}|}{Sensores \centering } &
-    \multicolumn{1}{p{4.217cm}|}{14/09 a 4/10/2016 \centering } &
-    \multicolumn{1}{p{4.217cm}|}{R\$ 30,00 \centering }
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}  
-    \multicolumn{1}{|p{3.850cm}|}{Ponte h \centering } &
-    \multicolumn{1}{p{4.217cm}|}{14/09 a 4/10/2016 \centering } &
-    \multicolumn{1}{p{4.217cm}|}{R\$ 50,00 \centering }
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}  
-    \multicolumn{1}{|p{3.850cm}|}{Raspberry Pi  \centering } &
-    \multicolumn{1}{p{4.217cm}|}{14/09 a 4/10/2016 \centering } &
-    \multicolumn{1}{p{4.217cm}|}{R\$ 300.00 \centering }
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}  
-    \multicolumn{1}{|p{3.850cm}|}{Codificador e Decofificador RF \centering } &
-    \multicolumn{1}{p{4.217cm}|}{14/09 a 4/10/2016 \centering } &
-    \multicolumn{1}{p{4.217cm}|}{R\$ 40,00 \centering }
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}  
-    \multicolumn{1}{|p{3.850cm}|}{Antena \centering } &
-    \multicolumn{1}{p{4.217cm}|}{14/09 a 4/10/2016 \centering } &
-    \multicolumn{1}{p{4.217cm}|}{R\$ 150,00 \centering }
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}  
-    \multicolumn{1}{|p{3.850cm}|}{Câmera (Raspberry) \centering } &
-    \multicolumn{1}{p{4.217cm}|}{14/09 a 4/10/2016 \centering } &
-    \multicolumn{1}{p{4.217cm}|}{R\$ 70,00 \centering }
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}  
-    \multicolumn{2}{|p{3.850cm}|}{Total \centering } &
-    \multicolumn{1}{p{4.217cm}|}{R\$ 665,00 \centering }
-  \\  
-  \hline
-
- \end{tabular} }
-\end{table}
+\lstinputlisting[language=Python]{define np}
 
 
-\subsection{Cronograma de atividades}
-
-A Tabela \ref{tab:cronograma_controle} apresenta todas as atividades que serão realizadas pelo subgrupo de controle até a entrega final do produto.
-
-% ######## init table ########
-\begin{table}[!htbp]
- \centering
- \caption{Cronograma de atividades do Subsistema Controle} \label{tab:cronograma_controle}
-% distancia entre a linha e o texto
- {\renewcommand\arraystretch{1.25}
- \begin{tabular}{ l l l l l }
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.900cm}|}{\textbf{Atividades}} &
-    \multicolumn{1}{p{1.817cm}|}{\textbf{Duração}} &
-    \multicolumn{1}{p{1.650cm}|}{\textbf{Data de início}} &
-    \multicolumn{1}{p{1.550cm}|}{\textbf{Data de fim}} &
-    \multicolumn{1}{p{2.000cm}|}{\textbf{Status}}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.900cm}|}{\textbf{Fase 1}} &
-    \multicolumn{1}{p{1.817cm}|}{\textbf{7 dias}} &
-    \multicolumn{1}{p{1.650cm}|}{\textbf{17/08}} &
-    \multicolumn{1}{p{1.550cm}|}{\textbf{24/08}} &
-    \multicolumn{1}{p{2.000cm}|}{\textbf{Realizado}}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.900cm}|}{Pesquisar trabalhos correlatos} &
-    \multicolumn{1}{p{1.817cm}|}{5 dias} &
-    \multicolumn{1}{p{1.650cm}|}{19/08} &
-    \multicolumn{1}{p{1.550cm}|}{24/08} &
-    \multicolumn{1}{p{2.000cm}|}{Realizado}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.900cm}|}{Definir cronograma de controle} &
-    \multicolumn{1}{p{1.817cm}|}{1 dia} &
-    \multicolumn{1}{p{1.650cm}|}{24/8} &
-    \multicolumn{1}{p{1.550cm}|}{24/8} &
-    \multicolumn{1}{p{2.000cm}|}{Realizado}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.900cm}|}{\textbf{Fase 2}} &
-    \multicolumn{1}{p{1.817cm}|}{\textbf{15 dias}} &
-    \multicolumn{1}{p{1.650cm}|}{\textbf{24/8}} &
-    \multicolumn{1}{p{1.550cm}|}{\textbf{9/9}} &
-    \multicolumn{1}{p{2.000cm}|}{Realizado}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.900cm}|}{Propor um esquema de solução} &
-    \multicolumn{1}{p{1.817cm}|}{1 dia} &
-    \multicolumn{1}{p{1.650cm}|}{24/8} &
-    \multicolumn{1}{p{1.550cm}|}{24/8} &
-    \multicolumn{1}{p{2.000cm}|}{Realizado}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.900cm}|}{Pesquisar componentes do esquema  			
-
-Sensores e processadores – eletrônica  			
-
-Algoritmos - software} &
-    \multicolumn{1}{p{1.817cm}|}{2 dias} &
-    \multicolumn{1}{p{1.650cm}|}{24/08} &
-    \multicolumn{1}{p{1.550cm}|}{26/8} &
-    \multicolumn{1}{p{2.000cm}|}{Realizado}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.900cm}|}{Projetar montagem e fabricação} &
-    \multicolumn{1}{p{1.817cm}|}{1 dia} &
-    \multicolumn{1}{p{1.650cm}|}{31/8} &
-    \multicolumn{1}{p{1.550cm}|}{31/8} &
-    \multicolumn{1}{p{2.000cm}|}{Realizado}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.900cm}|}{Escrever relatório} &
-    \multicolumn{1}{p{1.817cm}|}{3 dias} &
-    \multicolumn{1}{p{1.650cm}|}{31/8} &
-    \multicolumn{1}{p{1.550cm}|}{2/9} &
-    \multicolumn{1}{p{2.000cm}|}{Realizado}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.900cm}|}{Apresentação - todos} &
-    \multicolumn{1}{p{1.817cm}|}{1 dia} &
-    \multicolumn{1}{p{1.650cm}|}{9/9} &
-    \multicolumn{1}{p{1.550cm}|}{9/9} &
-    \multicolumn{1}{p{2.000cm}|}{Realizado}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.900cm}|}{\textbf{Fase 3}} &
-    \multicolumn{1}{p{1.817cm}|}{\textbf{61 dias}} &
-    \multicolumn{1}{p{1.650cm}|}{\textbf{9/9}} &
-    \multicolumn{1}{p{1.550cm}|}{\textbf{9/11}} &
-    \multicolumn{1}{p{2.000cm}|}{\textbf{À fazer}}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.900cm}|}{Definir e escolher componentes a - eletrônica} &
-    \multicolumn{1}{p{1.817cm}|}{6 dias} &
-    \multicolumn{1}{p{1.650cm}|}{14/9} &
-    \multicolumn{1}{p{1.550cm}|}{20/9} &
-    \multicolumn{1}{p{2.000cm}|}{À fazer}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.900cm}|}{Definir algoritmos utilizados – software} &
-    \multicolumn{1}{p{1.817cm}|}{6 dias} &
-    \multicolumn{1}{p{1.650cm}|}{14/9} &
-    \multicolumn{1}{p{1.550cm}|}{20/9} &
-    \multicolumn{1}{p{2.000cm}|}{À fazer}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.900cm}|}{Realizar simulações das placas projetadas – eletrônica} &
-    \multicolumn{1}{p{1.817cm}|}{3 dias} &
-    \multicolumn{1}{p{1.650cm}|}{20/9} &
-    \multicolumn{1}{p{1.550cm}|}{23/9} &
-    \multicolumn{1}{p{2.000cm}|}{À fazer}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.900cm}|}{Testar de algoritmo em primeiro protótipo – software} &
-    \multicolumn{1}{p{1.817cm}|}{30 dias} &
-    \multicolumn{1}{p{1.650cm}|}{23/9} &
-    \multicolumn{1}{p{1.550cm}|}{21/10} &
-    \multicolumn{1}{p{2.000cm}|}{À fazer}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.900cm}|}{Confeccionar placas – eletrônica} &
-    \multicolumn{1}{p{1.817cm}|}{16 dias} &
-    \multicolumn{1}{p{1.650cm}|}{4 /10} &
-    \multicolumn{1}{p{1.550cm}|}{21/10} &
-    \multicolumn{1}{p{2.000cm}|}{À fazer}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.900cm}|}{Testar placas – eletrônica} &
-    \multicolumn{1}{p{1.817cm}|}{3 dias} &
-    \multicolumn{1}{p{1.650cm}|}{25/10} &
-    \multicolumn{1}{p{1.550cm}|}{28/10} &
-    \multicolumn{1}{p{2.000cm}|}{À fazer}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.900cm}|}{Projetar a integração com outros subsistemas - todos} &
-    \multicolumn{1}{p{1.817cm}|}{3 dias} &
-    \multicolumn{1}{p{1.650cm}|}{25/10} &
-    \multicolumn{1}{p{1.550cm}|}{28/10} &
-    \multicolumn{1}{p{2.000cm}|}{À fazer}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.900cm}|}{Documentar avanços} &
-    \multicolumn{1}{p{1.817cm}|}{2 dias} &
-    \multicolumn{1}{p{1.650cm}|}{2/11} &
-    \multicolumn{1}{p{1.550cm}|}{4/11} &
-    \multicolumn{1}{p{2.000cm}|}{À fazer}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.900cm}|}{Apresentação – todos} &
-    \multicolumn{1}{p{1.817cm}|}{1 dia} &
-    \multicolumn{1}{p{1.650cm}|}{9/11} &
-    \multicolumn{1}{p{1.550cm}|}{9/11} &
-    \multicolumn{1}{p{2.000cm}|}{À fazer}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.900cm}|}{\textbf{Fase 4}} &
-    \multicolumn{1}{p{1.817cm}|}{\textbf{23 dias}} &
-    \multicolumn{1}{p{1.650cm}|}{\textbf{9/11}} &
-    \multicolumn{1}{p{1.550cm}|}{\textbf{2/12}} &
-    \multicolumn{1}{p{2.000cm}|}{À fazer}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.900cm}|}{Testar a integração com os subsistemas} &
-    \multicolumn{1}{p{1.817cm}|}{12 dias} &
-    \multicolumn{1}{p{1.650cm}|}{11/11} &
-    \multicolumn{1}{p{1.550cm}|}{23/11} &
-    \multicolumn{1}{p{2.000cm}|}{À fazer}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.900cm}|}{Definir o protótipo final} &
-    \multicolumn{1}{p{1.817cm}|}{5 dias} &
-    \multicolumn{1}{p{1.650cm}|}{25/11} &
-    \multicolumn{1}{p{1.550cm}|}{30/11} &
-    \multicolumn{1}{p{2.000cm}|}{À fazer}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.900cm}|}{Documentar avanços finais} &
-    \multicolumn{1}{p{1.817cm}|}{5 dias} &
-    \multicolumn{1}{p{1.650cm}|}{25/11} &
-    \multicolumn{1}{p{1.550cm}|}{30/11} &
-    \multicolumn{1}{p{2.000cm}|}{À fazer}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.900cm}|}{Apresentação final} &
-    \multicolumn{1}{p{1.817cm}|}{1 dia} &
-    \multicolumn{1}{p{1.650cm}|}{2/12} &
-    \multicolumn{1}{p{1.550cm}|}{2/12} &
-    \multicolumn{1}{p{2.000cm}|}{À fazer}
-  \\  
-  \hline
-
- \end{tabular} }
-\end{table}
-
-			
-\newpage
 
 

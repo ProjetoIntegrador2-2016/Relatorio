@@ -1,4 +1,4 @@
-\section{Subsistema: Alimentação}
+\section{Subsistema: Alimentação} \label{sec:alimentacao}
 
 \par O subsistema de alimentação do carrinho de compras autônomo compreende além dos  motores, que serão acoplados nas rodas traseiras, baterias para garantir alimentação para a movimentação do carrinho e o funcionamento dos componentes eletrônicos e um carregador para a bateria.
 \par Os motores de corrente contínua de 12 V serão alimentados por uma bateria com a mesma tensão, garantindo uma autonomia da até duas horas para que o usuário possa carregar as  compras do supermercado.
@@ -35,12 +35,13 @@ Para o projeto do carrinho de compras, optou-se por usar um sistema propulsor el
 \par•	Funcionamento contínuo, inclusive a baixas rotações;
 \par•	Características físicas, como tamanho e peso;
 
-\par A figura abaixo mostra as curvas características dos motores CC. Nela, é possível observar que a corrente será praticamente constante, variando apenas durante as acelerações provocadas pelo aumento da tensão, em que a corrente, transitoriamente, aumenta para provocar a aceleração da máquina. Portanto, em regime, o motor CC opera a corrente de armadura essencialmente constante também. Assim, o motor tem disponibilidade de acionar a carga exercendo um torque constante, podendo ser em qualquer rotação, desde que seja até o limite nominal, o que indica uma corrente de armadura nominal. \cite{prentice}
+\par A Figura \ref{fig:curvas_motor} mostra as curvas características dos motores CC. Nela, é possível observar que a corrente será praticamente constante, variando apenas durante as acelerações provocadas pelo aumento da tensão, em que a corrente, transitoriamente, aumenta para provocar a aceleração da máquina. Portanto, em regime, o motor CC opera a corrente de armadura essencialmente constante também. Assim, o motor tem disponibilidade de acionar a carga exercendo um torque constante, podendo ser em qualquer rotação, desde que seja até o limite nominal, o que indica uma corrente de armadura nominal \cite{prentice}.
+
 \begin{figure}[ht]
 		\centering
-		\includegraphics[width=1\textwidth]{figuras/curvamotorcc.JPG}
-		\caption{Curvas características de um motor CC.  \cite{prentice}}
-		\label{fig:curvamotorcc}
+		\includegraphics[width=0.6\textwidth]{figuras/curvamotorcc.JPG}
+		\caption{Curvas características de um motor CC.  Fonte: \citeauthor{prentice} (\citeyear{prentice}).}
+		\label{fig:curvas_motor}
 \end{figure} 
 
 
@@ -173,234 +174,8 @@ $$ Ah=39.46 $$
 \end{figure} 
 
 
-\subsection{Riscos Associados}
 
-Os riscos advindos das atividades relacionadas ao projeto elétrico são:
 
-\begin{itemize}  
-\item Riscos quanto a não localização de fornecedores de motores elétricos com requisitos específicos;
-\item Risco advindo da não capacidade do motor elétrico dimensionado, posto pelo eventual aumento do peso do sistema;
-\item Risco de necessidade de maior número de baterias do qual dimensionada, caso houver necessidade de maior quantidade de sensores que necessite de alimentação, acarretando elevação no peso e prejuízos gerais ao sistema, tanto estrutural quanto nas capacidades do motor dimensionado;
-\item Riscos na elaboração erronia do sistema de transmissão que deverá elevar o torque do motor para que seja ideal o arranque do carrinho, diminuindo proporcionalmente a velocidade deste;
-\item Risco quanto à integração, caso as dimensões de componentes elétricos, como por exemplo, a bateria não caiba nas dimensões planejadas e executadas pelos membros responsáveis pela estrutura;
-\end{itemize}
-
-\subsection{Cronograma Físico-Financeiro}
-
-O cronograma de alimentação será analisado a partir das atividades posteriores das que já foram realizadas no primeiro ponto de controle. Pode-se enumerar que já se realizou o dimensionamento dos cálculos para a obtenção das especificações necessárias de motor elétrico e baterias para que suporte as necessidades do sistema. 
-
-\begin{itemize}
-\item Dimensionamento preliminar de motor elétrico;
-\item Dimensionamento preliminar de bateria;
-\item Estudo dos tipos de motor elétrico a ser utilizado;
-\item Pesquisa de mercado para escolha do motor e bateria com as especificações definidas;
-\item Escolha e compra dos motores elétricos e baterias;
-\item Pesquisa para otimização do torque do motor elétrico para que atinja a exigência desejada;
-\item Instalação dos motores elétricos e baterias;
-\item Pesquisa do controlador PWM junto com a Ponte-H para controle da velocidade dos motores, em parceria com o subsistema de controle;
-\item Implementação do sistema de controle de velocidade no sistema geral;
-\item Análise da viabilidade da construção de um carregador de bateria;
-\item Implantação do sistema de carregamento.
-\end{itemize}
-
-Sobre os custos a tabela \ref{tab:custo_alimentacao} mostra os custos estimados para o subsistema de alimentação: 
-
-\begin{table}[]
-\centering
- \caption{Cronograma Físico-Financeiro Alimentação} \label{tab:custo_alimentacao}
-\begin{tabular}{lll}
-{\color[HTML]{000000} \textbf{Componente}} & {\color[HTML]{000000} \textbf{Data de aquisição/elaboração}} & {\color[HTML]{000000} \textbf{Preço estimado}} \\
-Motor elétrico                             & 02/09 a 11/09                                                & R\$ 200,00                                     \\
-Bateria                                    & 05/09 a 18/09                                                & R\$ 400,00                                     \\
-Carregador de bateria                      & 29/05 a 15/10                                                & R\$ 150,00 - R\$ 200,00                          \\
-Total                                      &                                                              & R\$ 750,00 - R\$ 800,00                         
-\end{tabular}
-\end{table}
-
-\subsection{Cronograma de atividades}
-A Tabela \ref{tab:cronograma_ali} apresenta todas as atividades que serão realizadas pelo subgrupo de controle até a entrega final do produto.
-
-% ######## init table ########
-\begin{table}[!htbp]
- \centering
- \caption{Cronograma de atividades do Subsistema Alimentação} \label{tab:cronograma_ali}
-% distancia entre a linha e o texto
- {\renewcommand\arraystretch{1.25}
- \begin{tabular}{ l l l l l }
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.367cm}|}{\textbf{Atividades}} &
-    \multicolumn{1}{p{1.750cm}|}{\textbf{Duração}} &
-    \multicolumn{1}{p{1.267cm}|}{\textbf{Data Inicial}} &
-    \multicolumn{1}{p{1.233cm}|}{\textbf{Data Final}} &
-    \multicolumn{1}{p{1.917cm}|}{\textbf{Status}}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.367cm}|}{\textbf{Fase 1}} &
-    \multicolumn{1}{p{1.750cm}|}{\textbf{7 dias}} &
-    \multicolumn{1}{p{1.267cm}|}{\textbf{17/8}} &
-    \multicolumn{1}{p{1.233cm}|}{\textbf{24/8}} &
-    \multicolumn{1}{p{1.917cm}|}{Realizado}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.367cm}|}{Realizar dimensionamento preliminar de motor elétrico} &
-    \multicolumn{1}{p{1.750cm}|}{7 dias} &
-    \multicolumn{1}{p{1.267cm}|}{19/8} &
-    \multicolumn{1}{p{1.233cm}|}{24/8} &
-    \multicolumn{1}{p{1.917cm}|}{Realizado}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.367cm}|}{\textbf{Fase 2}} &
-    \multicolumn{1}{p{1.750cm}|}{15 dias} &
-    \multicolumn{1}{p{1.267cm}|}{\textbf{24/8}} &
-    \multicolumn{1}{p{1.233cm}|}{\textbf{9/9}} &
-    \multicolumn{1}{p{1.917cm}|}{Realizado}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.367cm}|}{Realizar dimensionamento preliminar de bateria} &
-    \multicolumn{1}{p{1.750cm}|}{5 dias} &
-    \multicolumn{1}{p{1.267cm}|}{26/8} &
-    \multicolumn{1}{p{1.233cm}|}{31/8} &
-    \multicolumn{1}{p{1.917cm}|}{Realizado}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.367cm}|}{Realizar estudo dos tipos de motor elétrico a ser utilizado} &
-    \multicolumn{1}{p{1.750cm}|}{21 dias} &
-    \multicolumn{1}{p{1.267cm}|}{19/9} &
-    \multicolumn{1}{p{1.233cm}|}{09/9} &
-    \multicolumn{1}{p{1.917cm}|}{   			
-
-Realizado}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.367cm}|}{Efetuar pesquisa de mercado para escolha do motor e bateria com as especificações definidas} &
-    \multicolumn{1}{p{1.750cm}|}{14 dias} &
-    \multicolumn{1}{p{1.267cm}|}{26/8} &
-    \multicolumn{1}{p{1.233cm}|}{09/9} &
-    \multicolumn{1}{p{1.917cm}|}{Realizado}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.367cm}|}{Realizar pesquisa para otimização do torque do motor elétrico para que atinja a exigência desejada} &
-    \multicolumn{1}{p{1.750cm}|}{10 dias} &
-    \multicolumn{1}{p{1.267cm}|}{31/8} &
-    \multicolumn{1}{p{1.233cm}|}{09/9} &
-    \multicolumn{1}{p{1.917cm}|}{Realizado}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.367cm}|}{Realizar pesquisa para otimização do torque do motor elétrico para que atinja a exigência desejada} &
-    \multicolumn{1}{p{1.750cm}|}{10 dias} &
-    \multicolumn{1}{p{1.267cm}|}{31/8} &
-    \multicolumn{1}{p{1.233cm}|}{09/9} &
-    \multicolumn{1}{p{1.917cm}|}{Realizado}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.367cm}|}{Documentar avanços} &
-    \multicolumn{1}{p{1.750cm}|}{3 dias} &
-    \multicolumn{1}{p{1.267cm}|}{31/8} &
-    \multicolumn{1}{p{1.233cm}|}{2/9} &
-    \multicolumn{1}{p{1.917cm}|}{Realizado}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.367cm}|}{Ponto de Controle 1} &
-    \multicolumn{1}{p{1.750cm}|}{1 dia} &
-    \multicolumn{1}{p{1.267cm}|}{9/9} &
-    \multicolumn{1}{p{1.233cm}|}{9/9} &
-    \multicolumn{1}{p{1.917cm}|}{Realizado}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.367cm}|}{\textbf{Fase 3}} &
-    \multicolumn{1}{p{1.750cm}|}{61 dias} &
-    \multicolumn{1}{p{1.267cm}|}{\textbf{9/9}} &
-    \multicolumn{1}{p{1.233cm}|}{\textbf{9/11}} &
-    \multicolumn{1}{p{1.917cm}|}{A fazer}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.367cm}|}{Escolher e comprar motores elétricos e baterias} &
-    \multicolumn{1}{p{1.750cm}|}{7 dias} &
-    \multicolumn{1}{p{1.267cm}|}{09/9} &
-    \multicolumn{1}{p{1.233cm}|}{16/9} &
-    \multicolumn{1}{p{1.917cm}|}{A fazer}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.367cm}|}{Instalar motores elétricos e baterias} &
-    \multicolumn{1}{p{1.750cm}|}{14 dias} &
-    \multicolumn{1}{p{1.267cm}|}{26/9} &
-    \multicolumn{1}{p{1.233cm}|}{10/10} &
-    \multicolumn{1}{p{1.917cm}|}{À fazer}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.367cm}|}{Realizar pesquisa do controlador PWM junto com a Ponte-H para controle da velocidade dos motores.em parceria com o subsistema de controle} &
-    \multicolumn{1}{p{1.750cm}|}{14 dias} &
-    \multicolumn{1}{p{1.267cm}|}{31/8} &
-    \multicolumn{1}{p{1.233cm}|}{14/9} &
-    \multicolumn{1}{p{1.917cm}|}{Em andamento}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.367cm}|}{Analisar a viabilidade da construção de um carregador de bateria} &
-    \multicolumn{1}{p{1.750cm}|}{21 dias} &
-    \multicolumn{1}{p{1.267cm}|}{09/9} &
-    \multicolumn{1}{p{1.233cm}|}{30/9} &
-    \multicolumn{1}{p{1.917cm}|}{Em andamento}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.367cm}|}{Implantar sistema de carregamento} &
-    \multicolumn{1}{p{1.750cm}|}{21 dias} &
-    \multicolumn{1}{p{1.267cm}|}{30/9} &
-    \multicolumn{1}{p{1.233cm}|}{21/10} &
-    \multicolumn{1}{p{1.917cm}|}{À fazer}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.367cm}|}{Documentar avanços} &
-    \multicolumn{1}{p{1.750cm}|}{2 dias} &
-    \multicolumn{1}{p{1.267cm}|}{2/11} &
-    \multicolumn{1}{p{1.233cm}|}{4/11} &
-    \multicolumn{1}{p{1.917cm}|}{À fazer}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.367cm}|}{Ponto de controle 2} &
-    \multicolumn{1}{p{1.750cm}|}{1 dia} &
-    \multicolumn{1}{p{1.267cm}|}{9/11} &
-    \multicolumn{1}{p{1.233cm}|}{9/11} &
-    \multicolumn{1}{p{1.917cm}|}{À fazer}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.367cm}|}{\textbf{Fase 4}} &
-    \multicolumn{1}{p{1.750cm}|}{\textbf{23 dias}} &
-    \multicolumn{1}{p{1.267cm}|}{\textbf{9/11}} &
-    \multicolumn{1}{p{1.233cm}|}{\textbf{2/12}} &
-    \multicolumn{1}{p{1.917cm}|}{À fazer}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.367cm}|}{Integrar sistema de controle de velocidade ao sistema geral} &
-    \multicolumn{1}{p{1.750cm}|}{30 dias} &
-    \multicolumn{1}{p{1.267cm}|}{10/10} &
-    \multicolumn{1}{p{1.233cm}|}{10/11} &
-    \multicolumn{1}{p{1.917cm}|}{À fazer}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.367cm}|}{Testar a integração com os subsistemas – todos} &
-    \multicolumn{1}{p{1.750cm}|}{12 dias} &
-    \multicolumn{1}{p{1.267cm}|}{11/11} &
-    \multicolumn{1}{p{1.233cm}|}{23/11} &
-    \multicolumn{1}{p{1.917cm}|}{À fazer}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.367cm}|}{Documentar avanços finais} &
-    \multicolumn{1}{p{1.750cm}|}{5 dias} &
-    \multicolumn{1}{p{1.267cm}|}{25/11} &
-    \multicolumn{1}{p{1.233cm}|}{30/11} &
-    \multicolumn{1}{p{1.917cm}|}{À fazer}
-  \\  
-  \cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}\cline{5-5}  
-    \multicolumn{1}{|p{6.367cm}|}{Apresentação final} &
-    \multicolumn{1}{p{1.750cm}|}{1 dia} &
-    \multicolumn{1}{p{1.267cm}|}{2/12} &
-    \multicolumn{1}{p{1.233cm}|}{2/12} &
-    \multicolumn{1}{p{1.917cm}|}{À fazer}
-  \\  
-  \hline
-
- \end{tabular} }
-\end{table}
 
 
 							
